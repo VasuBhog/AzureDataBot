@@ -12,18 +12,19 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello",
-        "onCommand:extension.showCurrentConnection"
+        "onCommand:extension.showCurrentConnection",
+        "onCommand:AzureDataBot"
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        },
+        "commands": [
         {
             "command": "extension.showCurrentConnection",
             "title": "Show Current Connection"
+        },
+        {
+            "command": "AzureDataBot",
+            "title": "Launch Azure Data Bot"
         }]
     },
     "scripts": {

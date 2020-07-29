@@ -13,33 +13,73 @@ import * as azdata from 'azdata';
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "CUI" is now active!');
-
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    context.subscriptions.push(vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    }));
+    context.subscriptions.push(
+        vscode.commands.registerCommand('AzureDataBot', () => {
+            // Create and show a new webview
+            const panel = vscode.window.createWebviewPanel(
+                'AzureDataBot', // Identifies the type of the webview. Used internally
+                'Azure Data Bot', // Title of the panel displayed to the user
+                vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+                {
+                    enableScripts: true
+                } // Webview options. More on these later.
+            );
+            panel.webview.html = getWebViewContent();
+        })
+    );
 
     context.subscriptions.push(vscode.commands.registerCommand('extension.showCurrentConnection', () => {
         // The code you place here will be executed every time your command is executed
-
         // Display a message box to the user
         azdata.connection.getCurrentConnection().then(connection => {
             let connectionId = connection ? connection.connectionId : 'No connection found!';
             vscode.window.showInformationMessage(connectionId);
         }, error => {
-             console.info(error);
+            console.info(error);
         });
     }));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+function getWebViewContent() {
+    return `<!DOCTYPE html>
+    <html>
+    <head>
+    
+      <style type="text/css">
+            html{
+                height: 100% !important;
+            }
+
+            body{
+                height:100%;
+                position: relative;
+            }
+            .css-eycyw2.css-1882x3w.css-1l9a57c{
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+            }
+      </style>
+    </head>
+   <body>
+      <div id="webchat" role="main"></div>
+      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+      <script>
+         window.WebChat.renderWebChat(
+            {
+               directLine: window.WebChat.createDirectLine({
+                  secret: '4KkcnVf2tMc.miTg6E4gqoRXy1AXhgvdN7KWUz7B64d4aMV8V9ByZWc'
+               }),
+               userID: 'vasubhog'
+            },
+            document.getElementById('webchat')
+         );
+      </script>
+   </body>
+</html>`;
 }
