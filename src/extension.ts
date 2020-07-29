@@ -47,35 +47,35 @@ export function deactivate() {
 function getWebViewContent() {
     return `<!DOCTYPE html>
     <html>
-    <head>
+      <head>
+        <script
+          crossorigin="anonymous"
+          src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"
+        ></script>
+        <style>
+          html,
+          body {
+             height: 100%;
+          }
     
-      <style type="text/css">
-            html{
-                height: 100% !important;
-            }
-
-            body{
-                height:100%;
-                position: relative;
-            }
-            .css-eycyw2.css-1882x3w.css-1l9a57c{
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-            }
-      </style>
+          body {
+            margin: 0;
+          }
+    
+          #webchat {
+            height: 100%;
+            width: 100%;
+          }
+        </style>
     </head>
    <body>
       <div id="webchat" role="main"></div>
-      <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
       <script>
          window.WebChat.renderWebChat(
             {
                directLine: window.WebChat.createDirectLine({
-                  secret: '4KkcnVf2tMc.miTg6E4gqoRXy1AXhgvdN7KWUz7B64d4aMV8V9ByZWc'
+                    token: 'ew0KICAiYWxnIjogIlJTMjU2IiwNCiAgImtpZCI6ICJMaXMyNEY4cUFxa2VQeW1ZUk9xVzd3anJKdFEiLA0KICAieDV0IjogIkxpczI0RjhxQXFrZVB5bVlST3FXN3dqckp0USIsDQogICJ0eXAiOiAiSldUIg0KfQ.ew0KICAiYm90IjogIkFEU0NVSXYxIiwNCiAgInNpdGUiOiAiQkF2MVNmWlc1NGsiLA0KICAiY29udiI6ICJDSHpUSkxDSExhVUdrUnExbnVQaXRKLWYiLA0KICAibmJmIjogMTU5NjA2MTIxOCwNCiAgImV4cCI6IDE1OTYwNjQ4MTgsDQogICJpc3MiOiAiaHR0cHM6Ly9kaXJlY3RsaW5lLmJvdGZyYW1ld29yay5jb20vIiwNCiAgImF1ZCI6ICJodHRwczovL2RpcmVjdGxpbmUuYm90ZnJhbWV3b3JrLmNvbS8iDQp9.dcAHW63KqDTOQZJCZNjgsAM1I7ECDfyjT9H2x-rkeHzZTX7woK-EIiSp0ac-iESaBoGot_nIDfSQClrIaxHnOIDuYrn4UgsOa9ynSQwOumRpX2E9CkIAiGFmGPf8h_SaKQVE7enfhsiA65WkM6lBgAinNO30ZJBbokLCZQaY7G6o4u7w_tFPC9FmGSw6AUY7T6QR0F28oSdpvuNpkWsxsq9Lzhxo1_Fs8YrJ3KI8WZtMn0gwqfuhGEh4YHu4B7GkHMRtB_DygWczSupIEg0iyBYOIUYcccUIvEFOrfzBHs1Ch9n_9d2Hs4ciKPpCGOwERn1kwgJyt6X82FYh_qVHcw'
                }),
-               userID: 'vasubhog'
             },
             document.getElementById('webchat')
          );
