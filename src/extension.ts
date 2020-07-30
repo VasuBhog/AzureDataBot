@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
             const panel = vscode.window.createWebviewPanel(
                 'AzureDataBot', // Identifies the type of the webview. Used internally
                 'Azure Data Bot', // Title of the panel displayed to the user
-                vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+                vscode.ViewColumn.Two, // Editor column to show the new webview panel in.
                 {
                     enableScripts: true
                 } // Webview options. More on these later.
@@ -71,14 +71,26 @@ function getWebViewContent() {
    <body>
       <div id="webchat" role="main"></div>
       <script>
-         window.WebChat.renderWebChat(
-            {
-               directLine: window.WebChat.createDirectLine({
-                    token: 'ew0KICAiYWxnIjogIlJTMjU2IiwNCiAgImtpZCI6ICJMaXMyNEY4cUFxa2VQeW1ZUk9xVzd3anJKdFEiLA0KICAieDV0IjogIkxpczI0RjhxQXFrZVB5bVlST3FXN3dqckp0USIsDQogICJ0eXAiOiAiSldUIg0KfQ.ew0KICAiYm90IjogIkFEU0NVSXYxIiwNCiAgInNpdGUiOiAiQkF2MVNmWlc1NGsiLA0KICAiY29udiI6ICJDSHpUSkxDSExhVUdrUnExbnVQaXRKLWYiLA0KICAibmJmIjogMTU5NjA2MTIxOCwNCiAgImV4cCI6IDE1OTYwNjQ4MTgsDQogICJpc3MiOiAiaHR0cHM6Ly9kaXJlY3RsaW5lLmJvdGZyYW1ld29yay5jb20vIiwNCiAgImF1ZCI6ICJodHRwczovL2RpcmVjdGxpbmUuYm90ZnJhbWV3b3JrLmNvbS8iDQp9.dcAHW63KqDTOQZJCZNjgsAM1I7ECDfyjT9H2x-rkeHzZTX7woK-EIiSp0ac-iESaBoGot_nIDfSQClrIaxHnOIDuYrn4UgsOa9ynSQwOumRpX2E9CkIAiGFmGPf8h_SaKQVE7enfhsiA65WkM6lBgAinNO30ZJBbokLCZQaY7G6o4u7w_tFPC9FmGSw6AUY7T6QR0F28oSdpvuNpkWsxsq9Lzhxo1_Fs8YrJ3KI8WZtMn0gwqfuhGEh4YHu4B7GkHMRtB_DygWczSupIEg0iyBYOIUYcccUIvEFOrfzBHs1Ch9n_9d2Hs4ciKPpCGOwERn1kwgJyt6X82FYh_qVHcw'
-               }),
-            },
-            document.getElementById('webchat')
-         );
+          var request = new XMLHttpRequest();
+          var webChatToken; 
+          request.open("POST",'https://directline.botframework.com/v3/directline/tokens/generate', true);
+          request.setRequestHeader("Authorization", 'Bearer ' + 'qmPwXUzo22w.FLDArSy085fYO102vT4ancbwVktVg3QnXValx109kds');
+          request.setRequestHeader('Accept', 'application/json');
+          request.send();
+          request.onreadystatechange = function () {
+                if (request.readyState === request.DONE) {
+                    var response = request.responseText;
+                    var obj = JSON.parse(response);
+                    webChatToken = obj.token;
+                }
+                console.log(webChatToken);
+                window.WebChat.renderWebChat(
+                    {
+                    directLine: window.WebChat.createDirectLine({ token: webChatToken }),
+                    },
+                    document.getElementById('webchat')
+            );};
+            
       </script>
    </body>
 </html>`;
