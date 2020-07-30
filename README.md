@@ -14,7 +14,7 @@ This project involves 3 major components:
 
 ### Launch the Azure Data Bot using:
 
-Open the Command Palette (Ctrl+Shift+P) -> Type "Launch Azure Data Bot"
+Open the Command Palette (Ctrl+Shift+P) -> Type `Launch Azure Data Bot`
 
 This will open the Azure Data Bot and you can begin the support by saying "Hello".
 
