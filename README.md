@@ -1,4 +1,4 @@
-# Azure Data Bot README
+# Azure Data Bot
 
 This is the README for your extension "Azure Data Bot". 
 
