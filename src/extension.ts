@@ -74,7 +74,7 @@ function getWebViewContent() {
           var request = new XMLHttpRequest();
           var webChatToken; 
           request.open("POST",'https://directline.botframework.com/v3/directline/tokens/generate', true);
-          request.setRequestHeader("Authorization", 'Bearer ' + 'qmPwXUzo22w.FLDArSy085fYO102vT4ancbwVktVg3QnXValx109kds');
+          request.setRequestHeader("Authorization", 'Bearer ' + 'L9N5vQbHbOE.3ktVdAJQasxq_-1s0RoAkndtKnYjSyRya2tB7Q3GpqA');
           request.setRequestHeader('Accept', 'application/json');
           request.send();
           request.onreadystatechange = function () {
