@@ -1,4 +1,4 @@
-# Azure Data Bot README
+# Azure Data Bot
 
 This is the README for your extension "Azure Data Bot". 
 
@@ -31,6 +31,6 @@ This will open the Azure Data Bot and you can begin the support by saying "Hello
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Duplicate Welcome Message (fixed soon!)
 
 
