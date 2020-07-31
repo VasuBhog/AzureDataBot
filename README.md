@@ -1,6 +1,6 @@
 # Azure Data Bot
 
-This is the README for your extension "Azure Data Bot". 
+Extension for Azure Data Bot within Azure Data Studio
 
 ## Features
 
