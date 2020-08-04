@@ -20,7 +20,12 @@ This will open the Azure Data Bot and you can begin the support by saying "Hello
 
 ## Demo
 
-![Azure Data Bot example within Azure Data Studio](images/AzureDataBot-Error33111.gif)
+### Azure Data Bot Solves Error Code
+![Azure Data Bot example within Azure Data Studio](images/AzureDataBot_Error.gif)
+
+### Azure Data Bot Recovery Troubleshooting
+![Azure Data Bot example within Azure Data Studio](images/AzureDataBot_Recovery.gif)
+
 
 ## Requirements
 
