@@ -9,11 +9,6 @@ import * as vscode from 'vscode';
 
 import * as azdata from 'azdata';
 
-import * as path from 'path';
-import * as fs from 'fs';
-
-
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -27,12 +22,9 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.ViewColumn.Two, // Editor column to show the new webview panel in.
                 {
                     enableScripts: true
-                } 
+                } // Webview options. More on these later.
             );
-
-            const filePath: vscode.Uri = vscode.Uri.file(path.join(context.extensionPath, 'src', 'html', 'index.html'));
-
-            panel.webview.html = fs.readFileSync(filePath.fsPath, 'utf8');
+            panel.webview.html = getWebViewContent();
         })
     );
 
@@ -50,4 +42,65 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+function getWebViewContent() {
+    return `<!DOCTYPE html>
+    <html>
+    <head>
+      <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+      <style>
+        html,
+        body {
+          height: 100%;
+        }
+    
+        body {
+          margin: 0;
+        }
+    
+        #webchat {
+          height: 100%;
+          width: 100%;
+        }
+      </style>
+    </head>
+    
+    <body>
+      <div id="webchat" role="main"></div>
+      <script>
+        var webChatToken;
+        const userID = "dl_"+ Math.random().toString(36).substr(2, 9);
+        var body = {
+          "user": {
+            "id": userID
+          }
+        };
+        var request = new XMLHttpRequest();
+        request.open("POST", 'https://directline.botframework.com/v3/directline/tokens/generate', true);
+        request.setRequestHeader("Authorization", 'Bearer ' + 'L9N5vQbHbOE.3ktVdAJQasxq_-1s0RoAkndtKnYjSyRya2tB7Q3GpqA');
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.setRequestHeader('Accept', 'application/json');
+        request.send(JSON.stringify(body));
+        request.onreadystatechange = function () {
+          if (request.readyState === request.DONE) {
+            var response = request.responseText;
+            console.log(response);
+            var obj = JSON.parse(response);
+            webChatToken = obj.token;
+          }
+          window.WebChat.renderWebChat(
+            {
+              directLine: window.WebChat.createDirectLine({ token: webChatToken }),
+            },
+    
+            document.getElementById('webchat')
+          );
+          document.querySelector('#webchat > *').focus();
+        };
+    
+      </script>
+    </body>
+    
+    </html>`;
 }
