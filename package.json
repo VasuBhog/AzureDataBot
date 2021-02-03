@@ -1,9 +1,12 @@
 {
-    "name": "AzureDataBot",
+    "name": "azuredatabot",
     "displayName": "Azure Data Bot",
-    "description": "Chat Support for troubleshooting issues encountered while using Azure Data Studio",
-    "version": "0.0.1",
+    "description": "Conversation AI for Azure Data Studio",
+    "version": "0.0.2",
     "publisher": "vasubhog",
+    "icon": "images/extension.png",
+    "license": "https://raw.githubusercontent.com/Microsoft/azuredatastudio/main/LICENSE.txt",
+    "preview": true,
     "repository": {
         "type": "git",
         "url": "https://github.com/VasuBhog/AzureDataBot.git"
@@ -22,10 +25,6 @@
     "main": "./out/extension",
     "contributes": {
         "commands": [
-            {
-                "command": "extension.showCurrentConnection",
-                "title": "Show Current Connection"
-            },
             {
                 "command": "AzureDataBot",
                 "title": "Launch Azure Data Bot"
